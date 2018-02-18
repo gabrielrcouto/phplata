@@ -1,0 +1,22 @@
+{
+    "name": "gabrielrcouto/phpcoin",
+    "type": "library",
+    "authors": [
+        {
+            "name": "Gabriel Rodrigues Couto",
+            "email": "gabrielrcouto@gmail.com"
+        }
+    ],
+    "autoload": {
+        "psr-4": {
+            "PHPCoin\\": "src/"
+        }
+    },
+    "require": {
+        "stephenhill/base58": "^1.1",
+        "paragonie/sodium_compat": "^1.6"
+    },
+    "require-dev": {
+        "phpunit/phpunit": "^7"
+    }
+}
