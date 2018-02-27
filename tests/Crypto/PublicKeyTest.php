@@ -2,8 +2,8 @@
 declare (strict_types = 1);
 
 use PHPUnit\Framework\TestCase;
-use PHPCoin\Crypto\PrivateKey;
-use PHPCoin\Crypto\PublicKey;
+use PHPlata\Crypto\PrivateKey;
+use PHPlata\Crypto\PublicKey;
 
 final class PublicKeyTest extends TestCase
 {

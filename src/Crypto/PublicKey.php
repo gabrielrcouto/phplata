@@ -1,5 +1,5 @@
 <?php
-namespace PHPCoin\Crypto;
+namespace PHPlata\Crypto;
 
 use StephenHill\Base58;
 

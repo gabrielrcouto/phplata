@@ -1,5 +1,5 @@
 <?php
-namespace PHPCoin;
+namespace PHPlata\Transaction;
 
 class Txin
 {

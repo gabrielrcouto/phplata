@@ -1,5 +1,5 @@
 <?php
-namespace PHPCoin\Blockchain;
+namespace PHPlata\Blockchain;
 
 class BlockHeader
 {

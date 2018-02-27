@@ -2,7 +2,7 @@
 declare (strict_types = 1);
 
 use PHPUnit\Framework\TestCase;
-use PHPCoin\Crypto\PrivateKey;
+use PHPlata\Crypto\PrivateKey;
 
 final class PrivateKeyTest extends TestCase
 {

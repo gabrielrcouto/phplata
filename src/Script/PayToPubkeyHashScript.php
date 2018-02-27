@@ -1,5 +1,5 @@
 <?php
-namespace PHPCoin\Script;
+namespace PHPlata\Script;
 
 class PayToPubkeyHashScript
 {

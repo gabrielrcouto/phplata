@@ -1,5 +1,5 @@
 <?php
-namespace PHPCoin\Crypto;
+namespace PHPlata\Crypto;
 
 class PrivateKey
 {

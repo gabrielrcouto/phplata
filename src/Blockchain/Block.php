@@ -1,12 +1,13 @@
 <?php
-namespace PHPCoin\Blockchain;
+namespace PHPlata\Blockchain;
 
-use PHPCoin\Blockchain\BlockHeader;
+use PHPlata\Blockchain\BlockHeader;
 
 class Block
 {
-    protected $header;
     protected $data;
+    protected $hash;
+    protected $header;
 
     public function __construct($header, $data)
     {

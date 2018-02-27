@@ -2,12 +2,12 @@
 declare(strict_types=1);
 
 use PHPUnit\Framework\TestCase;
-use PHPCoin\Transaction;
-use PHPCoin\Txin;
-use PHPCoin\Txout;
-use PHPCoin\Script\PayToPubkeyHashScript;
-use PHPCoin\Crypto\PrivateKey;
-use PHPCoin\Crypto\PublicKey;
+use PHPlata\Transaction\Transaction;
+use PHPlata\Transaction\Txin;
+use PHPlata\Transaction\Txout;
+use PHPlata\Script\PayToPubkeyHashScript;
+use PHPlata\Crypto\PrivateKey;
+use PHPlata\Crypto\PublicKey;
 
 final class TransactionTest extends TestCase
 {

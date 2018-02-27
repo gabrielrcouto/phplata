@@ -1,5 +1,5 @@
 {
-    "name": "gabrielrcouto/phpcoin",
+    "name": "gabrielrcouto/phplata",
     "type": "library",
     "authors": [
         {
@@ -9,13 +9,14 @@
     ],
     "autoload": {
         "psr-4": {
-            "PHPCoin\\": "src/"
+            "PHPlata\\": "src/"
         }
     },
     "require": {
         "php" : ">=7.1",
         "stephenhill/base58": "^1.1",
-        "paragonie/sodium_compat": "^1.6"
+        "paragonie/sodium_compat": "^1.6",
+        "corveda/php-sandbox": "^2.0"
     },
     "require-dev": {
         "phpunit/phpunit": "^7"

@@ -1,38 +1,33 @@
 <?php
-namespace PHPCoin\Blockchain;
+namespace PHPlata\Blockchain;
 
-use PHPCoin\Block;
+use PHPlata\Block;
 
 class Chain
 {
-    protected $blocks;
-
-    public function __construct()
-    {
-        $this->blocks = [];
-    }
+    protected static $blocks;
 
     public function createBlock($data)
     {
         // Genesis (first) Block previous hash
         $previousBlockHash = '0';
 
-        if (count($this->blocks) > 0) {
-            $previousBlockHash = $this->blocks[count($this->blocks) - 1]->getHash();
+        if (count(self::$blocks) > 0) {
+            $previousBlockHash = self::$blocks[count(self::$blocks) - 1]->getHash();
         }
 
-        $newBlock = new Block([], count($this->blocks) + 1, $previousBlockHash);
-        $this->blocks[] = $newBlock;
+        $newBlock = new Block([], count(self::$blocks) + 1, $previousBlockHash);
+        self::$blocks[] = $newBlock;
 
         return $newBlock;
     }
 
-    public function getBlocks()
+    public static function getBlocks()
     {
-        return $this->blocks;
+        return self::$blocks;
     }
 
-    public function getLastBlock()
+    public static function getLastBlock()
     {
         if (empty($blocks)) {
             return null;

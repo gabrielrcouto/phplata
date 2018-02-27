@@ -1,7 +1,7 @@
 <?php
-namespace PHPCoin;
+namespace PHPlata\Transaction;
 
-use PHPCoin\Txin;
+use PHPlata\Transaction\Txin;
 
 class Transaction
 {
