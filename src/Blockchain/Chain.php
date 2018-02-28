@@ -1,25 +1,31 @@
 <?php
 namespace PHPlata\Blockchain;
 
-use PHPlata\Block;
+use PHPlata\Blockchain\Block;
 
 class Chain
 {
-    protected static $blocks;
+    protected static $blocks = [];
+    protected static $leaves = [];
 
-    public function createBlock($data)
+    public static function addBlock(Block $block)
     {
-        // Genesis (first) Block previous hash
-        $previousBlockHash = '0';
+        self::$blocks[$block->hash] = $block;
+        self::$leaves[$block->hash] = $block;
 
-        if (count(self::$blocks) > 0) {
-            $previousBlockHash = self::$blocks[count(self::$blocks) - 1]->getHash();
+        // The block is not a leaf anymore
+        if (array_key_exists($block->header->hashPrevBlock, self::$leaves)) {
+            unset(self::$leaves[$block->header->hashPrevBlock]);
+        }
+    }
+
+    public static function getBlockByHash(string $hash): ? Block
+    {
+        if (array_key_exists($hash, self::$blocks)) {
+            return self::$blocks[$hash];
         }
 
-        $newBlock = new Block([], count(self::$blocks) + 1, $previousBlockHash);
-        self::$blocks[] = $newBlock;
-
-        return $newBlock;
+        return null;
     }
 
     public static function getBlocks()
@@ -27,12 +33,8 @@ class Chain
         return self::$blocks;
     }
 
-    public static function getLastBlock()
+    public static function getLeaves()
     {
-        if (empty($blocks)) {
-            return null;
-        }
-
-        return $blocks[count($blocks) - 1];
+        return self::$leaves;
     }
 }

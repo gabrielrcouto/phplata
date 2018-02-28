@@ -16,32 +16,15 @@ class BlockHeader
     // Block format version
     public $version;
 
-    public function __construct(
-        $bits, 
-        $hashMerkleRoot, 
-        $hashPrevBlock,
-        $none, 
-        $time, 
-        $version
-    )
-    {
-        $this->bits = $bits;
-        $this->hashMerkleRoot = $hashMerkleRoot;
-        $this->hashPrevBlock = $hashPrevBlock;
-        $this->none = $none;
-        $this->time = $time;
-        $this->version = $version;
-    }
-
     public function getTargetFromBits()
     {
         // https://bitcoin.stackexchange.com/questions/44579/how-is-a-block-header-hash-compared-to-the-target-bits
 
         // The first byte is the "exponent"
-        $exponent = dechex((int) substr($this->bits, 0, 2));
+        $exponent = hexdec(substr($this->bits, 0, 2));
 
         // The next 3 bytes are the "coefficient"
-        $coefficient = dechex((int) substr($this->bits, 2));
+        $coefficient = hexdec(substr($this->bits, 2));
 
         return $coefficient * 2 ** (8 * ($exponent - 3));
     }

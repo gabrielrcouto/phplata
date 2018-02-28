@@ -46,4 +46,9 @@ class Transaction
 
         $this->txid = hash('sha256', $json);
     }
+
+    public function __toString()
+    {
+        return json_encode($this);
+    }
 }
