@@ -4,7 +4,7 @@ namespace PHPlata\Script;
 class PayToPubkeyHashScript
 {
     /**
-     * Get the receiver script part
+     * Get the receiver script part - For txin
      *
      * @param string $receiverPublicKey
      * @param string $receiverSignature
@@ -16,7 +16,7 @@ class PayToPubkeyHashScript
     }
 
     /**
-     * Get the sender script part
+     * Get the sender script part - For txout
      *
      * @param string $receiverPublicHash
      * @return string
