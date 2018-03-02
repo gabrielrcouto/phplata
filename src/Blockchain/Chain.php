@@ -2,11 +2,13 @@
 namespace PHPlata\Blockchain;
 
 use PHPlata\Blockchain\Block;
+use PHPlata\Transaction\Transaction;
 
 class Chain
 {
     protected static $blocks = [];
     protected static $leaves = [];
+    protected static $transactions = [];
 
     public static function addBlock(Block $block)
     {
@@ -16,6 +18,10 @@ class Chain
         // The block is not a leaf anymore
         if (array_key_exists($block->header->hashPrevBlock, self::$leaves)) {
             unset(self::$leaves[$block->header->hashPrevBlock]);
+        }
+
+        foreach ($block->transactions as $transaction) {
+            self::$transactions[$transaction->txid] = $transaction;
         }
     }
 
@@ -36,5 +42,14 @@ class Chain
     public static function getLeaves()
     {
         return self::$leaves;
+    }
+
+    public static function getTransactionById($id): ? Transaction
+    {
+        if (array_key_exists($id, self::$transactions)) {
+            return self::$transactions[$id];
+        }
+
+        return null;
     }
 }

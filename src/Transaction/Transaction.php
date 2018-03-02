@@ -16,7 +16,7 @@ class Transaction
     public function addToVin(Txin $txin):void
     {
         foreach ($this->vin as $addedTransaction) {
-            if ($addedTransaction->hash === $txin->hash) {
+            if ($addedTransaction->previousTx === $txin->previousTx && $addedTransaction->index === $txin->index) {
                 //@todo - Create a custom exception class
                 throw new \Exception('Transaction already added', 1);
             }

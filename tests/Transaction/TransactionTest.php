@@ -31,7 +31,7 @@ final class TransactionTest extends TestCase
 
     public function testAddToVinNotAddedTxin()
     {
-        $txin = new Txin(self::DEFAULT_TX_HASH, $this->receiverScript);
+        $txin = new Txin(self::DEFAULT_TX_HASH, 0, $this->receiverScript);
         $this->transaction->addToVin($txin);
         $this->assertContains($txin, $this->transaction->vin);
     }
@@ -41,14 +41,14 @@ final class TransactionTest extends TestCase
      */
     public function testAddToVinAlreadyAddedTxinException()
     {
-        $txin = new Txin(self::DEFAULT_TX_HASH, $this->receiverScript);
+        $txin = new Txin(self::DEFAULT_TX_HASH, 0, $this->receiverScript);
         $this->transaction->addToVin($txin);
         $this->transaction->addToVin($txin);
     }
 
     public function testIfCalculateHashFillsTxid()
     {
-        $txin = new Txin(self::DEFAULT_TX_HASH, $this->receiverScript);
+        $txin = new Txin(self::DEFAULT_TX_HASH, 0, $this->receiverScript);
         $this->transaction->addToVin($txin);
 
         $txout = new Txout(self::DEFAULT_VALUE, $this->senderScript);

@@ -2,7 +2,7 @@
 namespace PHPlata\Transaction;
 
 use PHPlata\Transaction\Txin;
-use PHPlata\Script\PayToPubkeyHashScript;
+use PHPlata\Script\CoinbaseScript;
 
 class Coinbase extends Transaction
 {
@@ -10,7 +10,11 @@ class Coinbase extends Transaction
 
     public function __construct(string $receiverHash)
     {
-        $script = PayToPubkeyHashScript::getSenderScript(($receiverHash));
+        $script = CoinbaseScript::getReceiverScript();
+        $txIn = new Txin('0000000000000000000000000000000000000000000000000000000000000000', 0, $script);
+        $this->addToVin($txIn);
+
+        $script = CoinbaseScript::getSenderScript(($receiverHash));
         $rewardTx = new Txout(self::REWARD, $script);
         $this->addToVout($rewardTx);
     }

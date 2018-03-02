@@ -17,7 +17,7 @@ final class CoinbaseTest extends TestCase
 
         $coinbase = new Coinbase($publicKeyHash);
 
-        $this->assertEmpty($coinbase->vin);
+        $this->assertNotEmpty($coinbase->vin);
         $this->assertNotEmpty($coinbase->vout);
     }
 }
