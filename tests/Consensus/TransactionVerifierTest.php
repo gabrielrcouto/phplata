@@ -152,4 +152,15 @@ final class TransactionVerifierTest extends TestCase
 
         TransactionVerifier::checkTransaction($transaction);
     }
+
+    public function testCheckTransactionScript()
+    {
+        $script = PayToPubkeyHashScript::getReceiverScript($this->publicKey, '');
+        $txin = new Txin($this->transaction->txid, 1, $script);
+
+        $script = PayToPubkeyHashScript::getSenderScript($this->publicKeyHash);
+        $txout = new Txout(10.99, $script);
+
+        $this->assertTrue(TransactionVerifier::checkTransactionScript($txin, $txout));
+    }
 }

@@ -1,7 +1,6 @@
-<?php
 function execute(string $receiverPublicKey, string $receiverSignature):bool
 {
-    if (generatePublicHash($receiverPublicKey) === '%PUBLIC_HASH%' && checkSignature($receiverSignature)) {
+    if (PublicKey::generateHash($receiverPublicKey) === '%PUBLIC_HASH%' && Signature::check('', $receiverSignature)) {
         return true;
     }
 
