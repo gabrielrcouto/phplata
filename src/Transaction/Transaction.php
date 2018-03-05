@@ -7,7 +7,9 @@ class Transaction
 {
     public $txid;
     public $version = 1;
+    // Input Vector
     public $vin = [];
+    // Output Vector
     public $vout = [];
 
     /**

@@ -91,6 +91,9 @@ class Block
     {
         $target = $this->header->getTargetFromBits();
 
+        // Update time
+        $this->header->time = time();
+
         $this->calculateHash();
 
         while (base_convert($this->hash, 16, 10) > $target) {

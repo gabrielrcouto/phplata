@@ -3,8 +3,9 @@ namespace PHPlata\Crypto;
 
 class Signature
 {
-    public static function check($data, $signature):string
+    public static function check($data, $publicKey, $signature):string
     {
+        // @TODO - Verify the signature
         return true;
     }
 

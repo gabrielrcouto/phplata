@@ -66,16 +66,19 @@ class TransactionVerifier
 
         $sandbox = \PHPSandbox\PHPSandbox::create();
         $sandbox->setOption('allow_functions', true);
-        $sandbox->setPrependedCode($txout->script . PHP_EOL);
-        $sandbox->defineClass(\ReflectionFunction::class, \ReflectionFunction::class);
-        $sandbox->defineUse('PHPlata\Crypto\PublicKey');
-        $sandbox->defineUse('PHPlata\Crypto\Signature');
-        $sandbox->defineVar('args', $args);
-        $sandbox->prepare(function() {
-            $function = new ReflectionFunction('execute');
-            return $function->invokeArgs($args);
+        $sandbox->defineClass('ReflectionFunction', \ReflectionFunction::class);
+        $sandbox->defineClass('PublicKey', \PHPlata\Crypto\PublicKey::class);
+        $sandbox->defineClass('Signature', \PHPlata\Crypto\Signature::class);
+        $sandbox->defineFunc('getTransactionData', function() use ($txin, $txout) {
+            return json_encode([$txin, $txout]);
         });
+        $sandbox->defineVar('args', $args);
 
+        $sandbox->prepare($txout->script . PHP_EOL . 
+            '$function = new ReflectionFunction("execute");
+            return $function->invokeArgs($args);;
+        ');
+        
         return $sandbox->execute();
     }
 }
