@@ -115,9 +115,6 @@ class Block
     {
         $target = $this->header->getTargetFromBits();
         $header = $this->header;
-
-        // Update time
-        $this->header->renewTime();
         $hash = $this->getHash();
 
         while (base_convert($hash, 16, 10) > $target) {
