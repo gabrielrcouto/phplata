@@ -1,5 +1,5 @@
 <?php
-declare (strict_types = 1);
+declare(strict_types = 1);
 
 namespace PHPlata\Blockchain;
 
@@ -44,9 +44,9 @@ class BlockHeader implements BlockHeaderInterface
     }
 
     /**
-     * @return int
+     * @return float
      */
-    public function getTargetFromBits(): int
+    public function getTargetFromBits(): float
     {
         // https://bitcoin.stackexchange.com/questions/44579/how-is-a-block-header-hash-compared-to-the-target-bits
 
