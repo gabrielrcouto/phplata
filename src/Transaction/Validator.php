@@ -18,7 +18,6 @@ class Validator
     protected function isVinValid(array $vin):bool
     {
         foreach ($vin as $txin) {
-            
         }
     }
 }

@@ -1,6 +1,9 @@
 <?php
 declare (strict_types = 1);
 
+namespace PHPlata\tests\Consensus;
+
+use PHPlata\Blockchain\BlockHeader;
 use PHPUnit\Framework\TestCase;
 use PHPlata\Blockchain\Block;
 use PHPlata\Blockchain\Chain;
@@ -24,14 +27,22 @@ final class TransactionVerifierTest extends TestCase
         $this->privateKey = PrivateKey::generate();
         $this->publicKey = PublicKey::generate($this->privateKey);
         $this->publicKeyHash = PublicKey::generateHash($this->publicKey);
-        
+
         $this->transaction = new Transaction;
         $script = PayToPubkeyHashScript::getSenderScript($this->publicKeyHash);
         $txout = new Txout(50.99, $script);
         $this->transaction->addToVout($txout);
         $this->transaction->calculateTxid();
 
-        $block = new Block();
+        $header = $header = BlockHeader::factory(
+            '535f0119',
+            null,
+            null,
+            1,
+            time(),
+            1
+        );
+        $block = Block::factory($header);
         $block->addTransaction($this->transaction);
         Chain::addBlock($block);
     }
