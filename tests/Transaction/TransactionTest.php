@@ -1,6 +1,8 @@
 <?php
 declare(strict_types=1);
 
+namespace PHPlata\tests\Transaction;
+
 use PHPUnit\Framework\TestCase;
 use PHPlata\Transaction\Transaction;
 use PHPlata\Transaction\Txin;

@@ -1,6 +1,8 @@
 <?php
 declare (strict_types = 1);
 
+namespace PHPlata\tests\Crypto;
+
 use PHPUnit\Framework\TestCase;
 use PHPlata\Crypto\PrivateKey;
 use PHPlata\Crypto\PublicKey;

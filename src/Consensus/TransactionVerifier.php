@@ -1,14 +1,22 @@
 <?php
 namespace PHPlata\Consensus;
 
+use PHPlata\Crypto\PublicKey;
+use PHPlata\Crypto\Signature;
 use PHPlata\Transaction\Transaction;
 use PHPlata\Blockchain\Chain;
 use PHPlata\Transaction\Txin;
 use PHPlata\Transaction\Txout;
-use PHPlata\Crypto\PublicKey;
+use PHPSandbox\PHPSandbox;
+use ReflectionFunction;
 
 class TransactionVerifier
 {
+    /**
+     * @param Transaction $transaction
+     * @return bool
+     * @throws \Exception
+     */
     public static function checkTransaction(Transaction $transaction): bool
     {
         // Basic checks that don't depend on any context
@@ -60,21 +68,27 @@ class TransactionVerifier
         return true;
     }
 
+    /**
+     * @param Txin $txin
+     * @param Txout $txout
+     * @return bool
+     * @throws \PHPSandbox\Error
+     */
     public static function checkTransactionScript(Txin $txin, Txout $txout): bool
     {
         $args = $txin->script;
 
-        $sandbox = \PHPSandbox\PHPSandbox::create();
+        $sandbox = PHPSandbox::create();
         $sandbox->setOption('allow_functions', true);
-        $sandbox->defineClass('ReflectionFunction', \ReflectionFunction::class);
-        $sandbox->defineClass('PublicKey', \PHPlata\Crypto\PublicKey::class);
-        $sandbox->defineClass('Signature', \PHPlata\Crypto\Signature::class);
-        $sandbox->defineFunc('getTransactionData', function() use ($txin, $txout) {
+        $sandbox->defineClass('ReflectionFunction', ReflectionFunction::class);
+        $sandbox->defineClass('PublicKey', PublicKey::class);
+        $sandbox->defineClass('Signature', Signature::class);
+        $sandbox->defineFunc('getTransactionData', function () use ($txin, $txout) {
             return json_encode([$txin, $txout]);
         });
         $sandbox->defineVar('args', $args);
 
-        $sandbox->prepare($txout->script . PHP_EOL . 
+        $sandbox->prepare($txout->script . PHP_EOL .
             '$function = new ReflectionFunction("execute");
             return $function->invokeArgs($args);;
         ');

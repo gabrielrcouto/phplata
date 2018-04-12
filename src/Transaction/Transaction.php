@@ -14,6 +14,8 @@ class Transaction
 
     /**
      * Add a transaction to input transaction array
+     * @param \PHPlata\Transaction\Txin $txin
+     * @throws \Exception
      */
     public function addToVin(Txin $txin):void
     {

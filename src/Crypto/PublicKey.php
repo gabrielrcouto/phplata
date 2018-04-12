@@ -22,7 +22,7 @@ class PublicKey
      * Generate the hashed version of public key
      *
      * Based on https://en.bitcoin.it/wiki/Technical_background_of_version_1_Bitcoin_addresses
-     * 
+     *
      * @param string $publicKey
      * @return string
      */
